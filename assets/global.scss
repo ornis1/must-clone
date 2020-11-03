@@ -1,0 +1,31 @@
+#app {
+  font-family: 'Lato', sans-serif;
+}
+
+.v-btn {
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: normal !important;
+  text-transform: initial !important;
+  color: $text-dark !important;
+
+  .v-ripple__container {
+    display: none !important;
+  }
+}
+
+.v-list-item {
+  &__title {
+    color: $text-dark !important;
+  }
+
+  &__subtitle {
+    color: $text-grey !important;
+  }
+
+  &__title,
+  &__subtitle {
+    font-weight: 700 !important;
+    font-size: 0.9375rem !important;
+  }
+}

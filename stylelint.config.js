@@ -530,7 +530,6 @@ module.exports = {
     'declaration-block-semicolon-space-before': 'never',
     'declaration-block-single-line-max-declarations': 0,
     'declaration-block-trailing-semicolon': 'always',
-    'declaration-colon-newline-after': 'always-multi-line',
     'declaration-colon-space-after': 'always-single-line',
     'declaration-colon-space-before': 'never',
     'declaration-empty-line-before': [
@@ -538,12 +537,6 @@ module.exports = {
       {
         except: ['after-declaration', 'first-nested'],
         ignore: ['after-comment', 'inside-single-line-block'],
-      },
-    ],
-    'declaration-no-important': [
-      true,
-      {
-        severity: 'warning',
       },
     ],
     'declaration-property-unit-blacklist': null,
@@ -662,7 +655,7 @@ module.exports = {
     'selector-type-no-unknown': true,
     'shorthand-property-no-redundant-values': true,
     'string-no-newline': true,
-    'string-quotes': 'double',
+    'string-quotes': 'single',
     'time-min-milliseconds': 10,
     'unit-disallowed-list': ['ch', 'cm', 'ex', 'in', 'mm', 'pc', 'pt', 'q'],
     'unit-case': 'lower',
