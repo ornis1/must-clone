@@ -1,7 +1,6 @@
 import { EventHandlerMap, Handler, WildcardHandler } from 'node_modules/mitt'
 
 export type MittTypes = 'open-modal-trailer' | 'open-modal-actors'
-
 export type Mitt = {
   all: EventHandlerMap
   on(type: '*', handler: WildcardHandler): void
