@@ -6,7 +6,7 @@
 
   v-menu(:max-height="280", offset-y, bottom, activator='.v-text-field')
     v-list(v-if="items.length")
-      SearchItem(v-for="item in items")
+      SearchItem(v-for="(item, index) in items" :key="index")
 
   v-text-field.pl-4.grey.lighten-3(
     v-model='input',

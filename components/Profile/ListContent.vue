@@ -1,6 +1,6 @@
 <template lang="pug">
 .grid
-  MovieCard.hover-zoom(v-for='link in mockItems', :key='link', :src='link')
+  MovieCard.hover-zoom(v-for='(link, index) in mockItems', :key='index', :src='link')
 </template>
 
 <script lang="ts">
