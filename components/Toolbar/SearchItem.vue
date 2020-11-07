@@ -1,31 +1,29 @@
 <template lang="pug">
 v-hover(#default='{hover}')
   v-list-item(
-    to='/asd',
+    :to='{ name: "p-id", params: { id: item.id } }',
     :ripple='false',
     color='transparent',
     :exact-active-class='null'
   )
     v-list-item-avatar(tile, height='50')
-      v-img(
-        contain,
-        src='https://image.tmdb.org/t/p/w342/baK79h2An0J8mzTue13KThAeYC5.jpg'
-      )
+      v-img(contain, :src='item.poster')
     v-list-item-content
-      v-list-item-title Иди и смотри
-      v-list-item-subtitle 1985
+      v-list-item-title {{ item.title }}
+      v-list-item-subtitle {{ item.year }}
     v-fade-transition
       v-list-item-action(v-show='hover')
-        v-btn.px-0.ml-4(text, to="1") Посмотрю
-        v-btn.px-0.mx-3(text, to="2") Просмотрено
+        v-btn.px-0.ml-4(text, to='') Посмотрю
+        v-btn.px-0.mx-3(text, to='') Просмотрено
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { ToolbarSearchItem } from '~/types'
 
 @Component({})
 export default class SearchItem extends Vue {
-  @Prop({ default: () => ({}) }) item!: any
+  @Prop({ default: () => ({}) }) item!: ToolbarSearchItem
 }
 </script>
 
