@@ -14,6 +14,10 @@ export type Mitt = {
 
 export type Movie = {
   id?: number
+  /**
+   * firebase document id
+   */
+  __id?: string
   title?: string
   video?: boolean
   vote_average?: number
@@ -32,8 +36,8 @@ export type Movie = {
     | 'Post Production'
     | 'Released'
     | 'Canceled'
-  videos: MovieVideos
-  credits: _MovieCredits
+  videos?: MovieVideos
+  credits?: _MovieCredits
 }
 type _MovieCredits = {
   id?: number
@@ -101,3 +105,8 @@ export type ToolbarSearchItem = {
   poster: string
   year: string
 }
+
+export type RequiredSome<T, K extends keyof T> = Required<Pick<T, K>> &
+  Omit<T, K>
+
+export type CollectionType = 'watched' | 'want' | 'shows'

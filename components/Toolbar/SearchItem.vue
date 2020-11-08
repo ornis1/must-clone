@@ -1,7 +1,6 @@
 <template lang="pug">
 v-hover(#default='{hover}')
   v-list-item(
-    :to='{ name: "p-id", params: { id: item.id } }',
     :ripple='false',
     color='transparent',
     :exact-active-class='null'
@@ -12,9 +11,15 @@ v-hover(#default='{hover}')
       v-list-item-title {{ item.title }}
       v-list-item-subtitle {{ item.year }}
     v-fade-transition
-      v-list-item-action(v-show='hover')
-        v-btn.px-0.ml-4(text, to='') Посмотрю
-        v-btn.px-0.mx-3(text, to='') Просмотрено
+      v-list-item-action(v-show='hover && showWantedBtn && showWatchedBtn')
+        v-btn.px-0.ml-4(v-if="showWantedBtn" text, @click.prevent="$emit('click:want')") Посмотрю
+        v-btn.px-0.mx-3(v-if="showWatchedBtn" text, @click.prevent="$emit('click:watched')") Просмотрено
+
+    v-fade-transition
+      v-list-item-action.mr-4(v-if="!showWantedBtn && !hover")
+        v-btn.font-weight-bold(disabled, color="text-grey", text, small)
+          v-icon.mr-1() mdi-check
+          | Посмотрю
 </template>
 
 <script lang="ts">
@@ -24,6 +29,20 @@ import { ToolbarSearchItem } from '~/types'
 @Component({})
 export default class SearchItem extends Vue {
   @Prop({ default: () => ({}) }) item!: ToolbarSearchItem
+
+  get showWantedBtn() {
+    return !this.$store.getters['profile/isAdded']({
+      type: 'want',
+      id: this.item.id,
+    })
+  }
+
+  get showWatchedBtn() {
+    return !this.$store.getters['profile/isAdded']({
+      type: 'watched',
+      id: this.item.id,
+    })
+  }
 }
 </script>
 

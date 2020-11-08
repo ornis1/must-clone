@@ -1,9 +1,9 @@
 import { MutationTree, ActionTree, ActionContext } from 'vuex'
-import { ToolbarSearchItem } from '~/types'
+import { Movie } from '~/types'
 import { RootState } from '~/types/store'
 
 export type State = {
-  items: ToolbarSearchItem[]
+  items: Movie[]
   loading: boolean
 }
 
@@ -13,7 +13,7 @@ export enum MutationType {
 }
 
 export type Mutations = MutationTree<State> & {
-  [MutationType.setItems](state: State, items: ToolbarSearchItem[]): void
+  [MutationType.setItems](state: State, items: Movie[]): void
   [MutationType.setLoading](state: State, value: boolean): void
 }
 

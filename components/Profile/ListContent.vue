@@ -1,20 +1,32 @@
 <template lang="pug">
 .grid
-  MovieCard.hover-zoom(v-for='(link, index) in mockItems', :key='index', :src='link')
+  MovieCard.hover-zoom(v-for='(movie, index) in userMedia', :key='index', :src='movie.poster_path')
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { CollectionType, Movie } from '~/types'
+import { mediaTypes } from '~/helpers'
 
 @Component({
   components: {
     MovieCard: () => import('@/components/Card.vue'),
   },
+  data() {
+    return { mediaTypes }
+  },
 })
 export default class ListContent extends Vue {
-  mockItems = Array(25).fill(
-    'https://media.mustapp.me/must/posters/w342/komwpO9QCUZ9iYeN60mF9sUlP7t.jpg'
-  )
+  mediaTypes!: CollectionType[]
+
+  get userMedia(): Movie[] {
+    const type = this.$route.params.slug as CollectionType
+
+    if (this.mediaTypes.includes(type)) {
+      return [...this.$store.state.profile[type]].reverse()
+    }
+    return []
+  }
 }
 </script>
 

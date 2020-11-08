@@ -6,7 +6,7 @@ import firebase from 'firebase'
   Убирает элементы с пустыми значениями
   и преобразовывает элементы в нужный нам тип
 */
-import { Movie, ToolbarSearchItem } from '~/types'
+import { CollectionType, Movie } from '~/types'
 
 /* Вспомогательные классы для модуля User в Store */
 class User implements IUser {
@@ -41,10 +41,12 @@ export const createImgURL = (
   return `${endpoint}w${width}${path}`
 }
 
-export function movieToItem(arg: Movie[]): ToolbarSearchItem[] {
-  const items: ToolbarSearchItem[] = []
+export function prettierMovies(arg: Movie[]): Movie[] {
+  const items: Movie[] = []
 
-  arg.forEach(({ id, title, poster_path, release_date }) => {
+  arg.forEach((item) => {
+    const { id, title, poster_path, release_date } = item
+
     if (id && title && poster_path && release_date) {
       let tmp
 
@@ -59,10 +61,11 @@ export function movieToItem(arg: Movie[]): ToolbarSearchItem[] {
       const year = format(new Date(tmp), 'yyyy')
 
       items.push({
+        ...item,
         id,
         title,
-        poster: createImgURL(poster_path),
-        year,
+        poster_path: createImgURL(poster_path),
+        release_date: year,
       })
     }
   })
@@ -70,3 +73,4 @@ export function movieToItem(arg: Movie[]): ToolbarSearchItem[] {
 }
 
 /* --------------------------------- */
+export const mediaTypes: CollectionType[] = ['want', 'watched', 'shows']

@@ -1,6 +1,6 @@
 import { Actions, ActionTypes, MutationType } from '~/types/store/toolbar'
 import api from '~/api'
-import { movieToItem } from '~/helpers'
+import { prettierMovies } from '~/helpers'
 
 const actions: Actions = {
   [ActionTypes.search]({ commit }, query) {
@@ -17,7 +17,7 @@ const actions: Actions = {
       .then((res) => {
         if (!res.results) return
 
-        const items = movieToItem(res.results)
+        const items = prettierMovies(res.results)
         commit(MutationType.setItems, items)
       })
       .catch((error) => console.error(error))
